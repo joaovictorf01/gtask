@@ -1,5 +1,14 @@
 version: '3.8'
 services:
+  gtask:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+
   mongodb:
     image: 'mongo:latest'
     environment:
@@ -7,9 +16,9 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: secret
       MONGO_INITDB_ROOT_USERNAME: root
     ports:
-      - '27017:27017'  # Expose MongoDB on the default port
+      - '27017:27017'  # Expõe MongoDB na porta padrão
     volumes:
-      - mongodb_data:/data/db  # Persist data even when container stops
+      - mongodb_data:/data/db  # Persiste dados mesmo quando o container para
 
 volumes:
-  mongodb_data:  # Volume to persist MongoDB data
+  mongodb_data:  # Volume para persistência de dados MongoDB
